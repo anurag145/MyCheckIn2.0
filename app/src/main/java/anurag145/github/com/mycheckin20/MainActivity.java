@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
-    ValueEventListener valueEventListener;
+    ValueEventListener valueEventListener1;
     DatabaseReference myRef;
 
     @Override
@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if(databaseError==null) {
                     textView.setText("Success");
-                    myRef.addValueEventListener(valueEventListener);
+                    myRef.addValueEventListener(valueEventListener1);
                 }
                 else
                   textView.setText(databaseError.toString());
             }
         });
-       valueEventListener = new ValueEventListener() {
+       valueEventListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 textView.setText(textView.getText()+"\n"+"in listener");
