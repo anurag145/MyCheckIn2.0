@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1059678348527",
+    "firebase_url": "https://mycheckin20.firebaseio.com",
+    "project_id": "mycheckin20",
+    "storage_bucket": "mycheckin20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059678348527:android:c1be7fd03c719780",
+        "android_client_info": {
+          "package_name": "anurag145.github.com.mycheckin20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059678348527-pu3o01brriru4b25n0hgh4lt9kb2i6mh.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1059678348527-pu3o01brriru4b25n0hgh4lt9kb2i6mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEDJ8uVOlqqm3P4PDsJsWtKkHD0hBD3vE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
