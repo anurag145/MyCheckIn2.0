@@ -1,60 +1,50 @@
 package anurag145.github.com.mycheckin20;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import com.facebook.network.connectionclass.ConnectionClassManager;
-import com.facebook.network.connectionclass.ConnectionQuality;
-import com.facebook.network.connectionclass.DeviceBandwidthSampler;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import android.util.Log;
+import android.widget.Toast;
+import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
-    TextView textView;
-    ValueEventListener valueEventListener1;
-    DatabaseReference myRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-       myRef = database.getReference("message");
-        textView= findViewById(R.id.main);
-        myRef.setValue("message", new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+        setupAlarm(12);
 
 
-                if(databaseError==null) {
-                    textView.setText("Success");
-                    myRef.addValueEventListener(valueEventListener1);
-                }
-                else
-                  textView.setText(databaseError.toString());
-            }
-        });
-       valueEventListener1 = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                textView.setText(textView.getText()+"\n"+"in listener");
-            }
+    }
+    private void setupAlarm(int seconds) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(getBaseContext(), Alarm.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                MainActivity.this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        try {
+            alarmManager.cancel(pendingIntent);
+            Log.d("alarmManager","success");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        }catch (NullPointerException e)
+        {
+            Log.d("alarmManager","fail");
 
-            }
-        };
+             Log.d("NullpointerException "," in catch");
+        }
+        Log.d("setupAlarm", "Setup the alarm");
 
-      //  connectionQuality= ConnectionClassManager.getInstance().getCurrentBandwidthQuality();
+        // Getting current time and add the seconds in it
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, seconds);
 
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
+        // Finish the currently running activity
+        MainActivity.this.finish();
     }
 
 
